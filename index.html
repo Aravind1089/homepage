@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aegan - Analytics & Video Studio | Dark Mode</title>
+  <meta name="description" content="Aegan offers Analytics services with Power BI dashboards & automation, plus Video Editing services including reels, promos, and edits. Training, pricing, founder story and more." />
+  <meta name="keywords" content="Analytics, Power BI, Automation, Video Editing, Reels, Promos, Training, Workshops, Pricing, Founder, Aravind Paraniraja" />
+  <meta name="author" content="Aegan Analytics" />
+  
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS v3 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS Animate On Scroll CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" />
+
+  <style>
+    /* Theme colors and typography */
+    :root {
+      --purple-dark: #2e026d;
+      --purple-light: #7f5af0;
+      --purple-accent: #9f7aea;
+      --dark-bg: #121214;
+      --dark-bg-alt: #1c1b29;
+      --text-light: #e0d7ff;
+      --text-light-alt: #bfb8ff;
+      --btn-hover-shadow: 0 5px 20px rgba(159, 122, 234, 0.7);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--purple-accent);
+      transition: color 0.3s ease;
+    }
+    a:hover,
+    a:focus {
+      color: var(--purple-light);
+      outline: none;
+    }
+
+    /* Buttons */
+    .btn-purple {
+      background: linear-gradient(90deg, var(--purple-light), var(--purple-accent));
+      color: white;
+      font-weight: 600;
+      border-radius: 0.375rem; /* rounded-md */
+      padding: 0.5rem 1.25rem;
+      box-shadow: 0 4px 15px rgba(159, 122, 234, 0.4);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+      user-select: none;
+    }
+    .btn-purple:hover,
+    .btn-purple:focus {
+      background: var(--purple-light);
+      outline: none;
+      box-shadow: var(--btn-hover-shadow);
+      transform: scale(1.05);
+    }
+
+    /* Carousel */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      box-shadow: 0 0 24px rgba(159, 122, 234, 0.7);
+      max-width: 100%;
+      height: 360px;
+    }
+    .carousel-slide {
+      display: flex;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .carousel-item {
+      min-width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .carousel-item h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-shadow: 0 0 15px rgba(159, 122, 234, 0.9);
+    }
+    .carousel-item p {
+      font-size: 1.125rem;
+      margin-top: 0.5rem;
+      color: var(--text-light-alt);
+      max-width: 700px;
+      text-shadow: 0 0 10px rgba(159, 122, 234, 0.7);
+    }
+    .carousel-bg1 {
+      background: linear-gradient(135deg, #5e3fd2, #8b5cf6);
+    }
+    .carousel-bg2 {
+      background: linear-gradient(135deg, #7c3aed, #c4b5fd);
+    }
+    .carousel-bg3 {
+      background: linear-gradient(135deg, #6d28d9, #a78bfa);
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(159, 122, 234, 0.8);
+      border: none;
+      color: white;
+      font-size: 1.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(159, 122, 234, 0.8);
+      transition: background 0.3s ease;
+      z-index: 10;
+      user-select: none;
+    }
+    .carousel-btn:hover,
+    .carousel-btn:focus {
+      background: var(--purple-light);
+      outline: none;
+    }
+    #prev-btn {
+      left: 1rem;
+    }
+    #next-btn {
+      right: 1rem;
+    }
+
+    /* Section heading */
+    h2.section-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--purple-light);
+      margin-bottom: 1rem;
+      text-align: center;
+      text-shadow: 0 0 10px var(--purple-accent);
+    }
+
+    /* Pricing calculator */
+    #total-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--purple-light);
+      transition: color 0.4s ease;
+    }
+    input[type="checkbox"] {
+      accent-color: var(--purple-accent);
+      cursor: pointer;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* Chatbot container */
+    #chatbot-container {
+      position: fixed;
+      bottom: 80px;
+      right: 30px;
+      width: 340px;
+      max-width: 90vw;
+      height: 480px;
+      background-color: #1c1b29;
+      border-radius: 0.75rem;
+      box-shadow: 0 0 15px rgba(159,122,234,0.9);
+      display: none;
+      flex-direction: column;
+      font-size: 0.95rem;
+      z-index: 9999;
+    }
+    #chatbot-header {
+      background: linear-gradient(90deg, var(--purple-dark), var(--purple-light));
+      color: white;
+      font-weight: 700;
+      padding: 1rem 1.25rem;
+      border-top-left-radius: 0.75rem;
+      border-top-right-radius: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    #chatbot-close {
+      cursor: pointer;
+      font-size: 1.5rem;
+      line-height: 1rem;
+      background: transparent;
+      border: none;
+      color: white;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+    #chatbot-close:hover,
+    #chatbot-close:focus {
+      color: var(--purple-light);
+      outline: none;
+    }
+    #chatbot-messages {
+      flex: 1;
+      overflow-y: auto;
+      background-color: #2a2647;
+      padding: 1rem;
+      scroll-behavior: smooth;
+    }
+    .chatbot-message-user,
+    .chatbot-message-bot {
+      margin-bottom: 1rem;
+      max-width: 80%;
+      word-wrap: break-word;
+      line-height: 1.3;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.75rem;
+    }
+    .chatbot-message-user {
+      margin-left: auto;
+      background: linear-gradient(90deg, var(--purple-light), var(--purple-accent));
+      color: #1a202c;
+      font-weight: 600;
+      text-align: right;
+    }
+    .chatbot-message-bot {
+      background-color: #433d71;
+      color: var(--text-light);
+      font-style: italic;
+    }
+    #chatbot-form {
+      padding: 0.5rem 1rem;
+      background-color: #1c1b29;
+      border-top: 1px solid #443c76;
+      display: flex;
+      gap: 0.5rem;
+    }
+    #chatbot-input {
+      flex-grow: 1;
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #3b3569;
+      color: var(--text-light);
+      font-size: 1rem;
+      outline-offset: 2px;
+      transition: all 0.3s ease;
+    }
+    #chatbot-input::placeholder {
+      color: #a79fe5;
+      font-style: italic;
+    }
+    #chatbot-input:focus {
+      box-shadow: 0 0 10px var(--purple-accent);
+      background-color: #4f46e5;
+      color: white;
+    }
+    #chatbot-send {
+      background: var(--purple-accent);
+      border: none;
+      border-radius: 9999px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0 1rem;
+      transition: background 0.3s ease;
+    }
+    #chatbot-send:hover,
+    #chatbot-send:focus {
+      background: var(--purple-light);
+      outline: none;
+    }
+
+    /* Scrollbar styling for chatbot messages */
+    #chatbot-messages::-webkit-scrollbar {
+      width: 8px;
+    }
+    #chatbot-messages::-webkit-scrollbar-thumb {
+      background: var(--purple-accent);
+      border-radius: 4px;
+    }
+
+    /* Testimonials blockquotes */
+    blockquote {
+      font-style: italic;
+      border-left: 4px solid var(--purple-light);
+      padding-left: 1rem;
+      color: var(--text-light-alt);
+      background-color: #1a172e;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 10px rgba(159,122,234,0.3);
+      transition: box-shadow 0.3s ease;
+    }
+    blockquote:hover {
+      box-shadow: 0 0 20px rgba(159,122,234,0.6);
+    }
+
+    /* FAQ details summary */
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      background-color: #2a2647;
+      transition: background-color 0.3s ease;
+    }
+    details[open] summary {
+      background: linear-gradient(90deg, var(--purple-light), var(--purple-accent));
+      color: #1a202c;
+    }
+    details p {
+      padding: 0.75rem 1rem;
+      background-color: #1c1b29;
+      margin-top: 0;
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+
+    /* Founder section */
+    .founder-img {
+      border: 4px solid #9f7aea;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 32px rgba(159,122,234,0.15);
+      width: 240px; height: 240px;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+    }
+    .story-quote {
+      font-size: 1.2rem;
+      font-style: italic;
+      background: rgba(159, 122, 234, 0.05);
+      border-left: 5px solid #9f7aea;
+      padding: 1.2rem;
+      border-radius: 0.5rem;
+      margin: 1.5rem 0;
+      color: #bfb8ff;
+      box-shadow: 0 2px 15px rgba(159,122,234,0.10);
+    }
+    .highlight {
+      color: #9f7aea;
+      font-weight: 700;
+    }
+
+    /* Know More link styling */
+    .know-more-link {
+      @apply inline-block mt-4 text-sm font-semibold underline underline-offset-2 text-purple-400 hover:text-purple-200;
+      cursor: pointer;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .carousel-container {
+        height: 280px;
+      }
+
+      .carousel-item h1 {
+        font-size: 1.75rem;
+      }
+
+      .carousel-item p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER with Navigation -->
+  <header
+    class="w-full px-4 py-5 bg-gradient-to-r from-purple-900 via-purple-700 to-purple-900 text-white flex flex-wrap justify-between items-center shadow-lg sticky top-0 z-50"
+  >
+    <span class="text-2xl font-bold tracking-wider drop-shadow-lg">Aegan</span>
+    <nav class="flex gap-5 font-semibold text-purple-200 text-lg">
+      <a href="#analytics" class="hover:text-white focus:text-white transition">Analytics</a>
+      <a href="#video-studio" class="hover:text-white focus:text-white transition">Video Studio</a>
+      <a href="#training" class="hover:text-white focus:text-white transition">Training</a>
+      <a href="#pricing" class="hover:text-white focus:text-white transition">Pricing</a>
+      <a href="#founder" class="hover:text-white focus:text-white transition">Founder</a>
+      <a href="#testimonials-faq" class="hover:text-white focus:text-white transition">Testimonials & FAQs</a>
+      <a href="#contact" class="hover:text-white focus:text-white transition">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Banner / Carousel -->
+  <section class="max-w-6xl mx-auto my-12 px-4">
+    <div
+      class="carousel-container"
+      aria-live="polite"
+      aria-atomic="true"
+      role="region"
+      aria-label="Promotional slides"
+    >
+      <div class="carousel-slide" id="carousel-slide">
+        <div class="carousel-item carousel-bg1" data-index="0" tabindex="0">
+          <div>
+            <h1>Welcome to Aegan Analytics & Video Studio</h1>
+            <p>Power BI Dashboards, Data Automation & Stunning Video Edits for Your Business.</p>
+            <a href="#founder" class="inline-block btn-purple mt-6 hover:scale-105">Meet the Founder</a>
+          </div>
+        </div>
+        <div class="carousel-item carousel-bg2" data-index="1" tabindex="-1">
+          <div>
+            <h1>Boost Your Business With Data Insights</h1>
+            <p>Modern analytics reports delivered fast and scalable.</p>
+          </div>
+        </div>
+        <div class="carousel-item carousel-bg3" data-index="2" tabindex="-1">
+          <div>
+            <h1>Creative Video Services</h1>
+            <p>Reels, Promos, and Editing crafted to engage your audience.</p>
+          </div>
+        </div>
+      </div>
+      <button id="prev-btn" class="carousel-btn" aria-label="Previous Slide" tabindex="0">&#10094;</button>
+      <button id="next-btn" class="carousel-btn" aria-label="Next Slide" tabindex="0">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- Aegan Analytics -->
+  <section id="analytics" class="max-w-6xl mx-auto px-4 my-16" data-aos="fade-up" data-aos-delay="100">
+    <h2 class="section-title">Aegan Analytics</h2>
+    <p class="max-w-3xl mx-auto mb-2 text-center text-gray-300">
+      Power BI dashboards and automation solutions designed to deliver actionable business insights.
+    </p>
+    <a href="https://aravind1089.github.io/Aegan_Analytics/" target="_blank" rel="noopener" class="know-more-link block text-center mb-8" aria-label="Know more about Aegan Analytics services">Know More &rarr;</a>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <article
+        class="bg-[#1c1b29] rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+        tabindex="0"
+        role="article"
+        aria-label="Inventory Dashboard project"
+      >
+        <img
+          src="project1.png"
+          alt="Inventory Dashboard Screenshot"
+          loading="lazy"
+          class="rounded-md mb-4 shadow-lg"
+        />
+        <h3 class="text-xl font-semibold text-purple-300 mb-2">Inventory Dashboard</h3>
+        <p class="text-gray-400">
+          Real-time tracking of inventory levels, turnover, and stock value with vendor-wise segmentation.
+        </p>
+      </article>
+      <article
+        class="bg-[#1c1b29] rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+        tabindex="0"
+        role="article"
+        aria-label="Loan Portfolio Tracker project"
+      >
+        <img
+          src="project2.png"
+          alt="Loan Portfolio Tracker Screenshot"
+          loading="lazy"
+          class="rounded-md mb-4 shadow-lg"
+        />
+        <h3 class="text-xl font-semibold text-purple-300 mb-2">Loan Portfolio Tracker</h3>
+        <p class="text-gray-400">
+          Summarizes loan status, funding trends, and financial health indicators across customer segments.
+        </p>
+      </article>
+      <article
+        class="bg-[#1c1b29] rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+        tabindex="0"
+        role="article"
+        aria-label="HR Analytics Dashboard project"
+      >
+        <img
+          src="project3.png"
+          alt="HR Analytics Dashboard Screenshot"
+          loading="lazy"
+          class="rounded-md mb-4 shadow-lg"
+        />
+        <h3 class="text-xl font-semibold text-purple-300 mb-2">HR Analytics Dashboard</h3>
+        <p class="text-gray-400">
+          Highlights attrition, salary analysis, and department-wise breakdowns to empower HR decisions.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Aegan Video Studio -->
+  <section
+    id="video-studio"
+    class="bg-[#1c1b29] py-14 px-6"
+    data-aos="fade-up"
+    data-aos-delay="200"
+  >
+    <div class="max-w-6xl mx-auto">
+      <h2 class="section-title mb-6">Aegan Video Studio</h2>
+      <p class="max-w-3xl mx-auto mb-1 text-gray-400 text-center">
+        Sample videos showcasing our creative video editing services.
+      </p>
+      <a href="https://aravind1089.github.io/Aegan_EFX/" target="_blank" rel="noopener" class="know-more-link block text-center mb-8" aria-label="Know more about Aegan Video Studio services">Know More &rarr;</a>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <video controls preload="metadata" class="w-full rounded-lg shadow-lg bg-black">
+          <source src="sample1.mp4" type="video/mp4" />Your browser does not support the video tag.
+        </video>
+        <video controls preload="metadata" class="w-full rounded-lg shadow-lg bg-black">
+          <source src="sample2.mp4" type="video/mp4" />Your browser does not support the video tag.
+        </video>
+        <video controls preload="metadata" class="w-full rounded-lg shadow-lg bg-black">
+          <source src="sample3.mp4" type="video/mp4" />Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training & Workshops -->
+  <section id="training" class="max-w-6xl mx-auto px-6 py-16" data-aos="fade-up" data-aos-delay="300">
+    <h2 class="section-title mb-8 text-center">Training & Workshops on Power BI</h2>
+    <div class="max-w-3xl mx-auto space-y-10">
+      <article>
+        <h3 class="text-2xl font-semibold text-purple-300 mb-2">Session 1: Intro to Power BI</h3>
+        <p class="text-gray-400">Understanding data modeling, visuals, and basic DAX.</p>
+      </article>
+      <article>
+        <h3 class="text-2xl font-semibold text-purple-300 mb-2">Session 2: Advanced DAX & Automation</h3>
+        <p class="text-gray-400">Writing complex measures and integrating with Power Automate.</p>
+      </article>
+      <article>
+        <h3 class="text-2xl font-semibold text-purple-300 mb-2">Session 3: Deployment & Best Practices</h3>
+        <p class="text-gray-400">Sharing reports securely and optimizing dashboards for performance.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Pricing Calculator -->
+  <section id="pricing" class="bg-[#1c1b29] py-14 px-6" data-aos="fade-up" data-aos-delay="400">
+    <div class="max-w-4xl mx-auto rounded-xl border border-purple-600 p-8 shadow-2xl">
+      <h2 class="section-title mb-8 text-center">Pricing Calculator</h2>
+      <form id="pricing-form" class="space-y-6" aria-label="Pricing calculator form">
+        <fieldset class="border border-purple-600 rounded-xl p-6">
+          <legend class="font-semibold mb-4 text-purple-300">Select Services</legend>
+          <label class="flex items-center gap-3 text-gray-300 cursor-pointer hover:text-purple-400 transition-colors">
+            <input type="checkbox" name="service" value="Power BI Analytics" data-cost="5000" />
+            Power BI Analytics - ₹5,000
+          </label>
+          <label class="flex items-center gap-3 text-gray-300 cursor-pointer hover:text-purple-400 transition-colors">
+            <input type="checkbox" name="service" value="Automation Solutions" data-cost="3500" />
+            Automation Solutions - ₹3,500
+          </label>
+          <label class="flex items-center gap-3 text-gray-300 cursor-pointer hover:text-purple-400 transition-colors">
+            <input type="checkbox" name="service" value="Video Editing" data-cost="4000" />
+            Video Editing (Reels, Promos) - ₹4,000
+          </label>
+          <label class="flex items-center gap-3 text-gray-300 cursor-pointer hover:text-purple-400 transition-colors">
+            <input type="checkbox" name="service" value="Training & Workshops" data-cost="2500" />
+            Training & Workshops - ₹2,500
+          </label>
+        </fieldset>
+
+        <p class="text-center text-purple-300 text-2xl font-extrabold select-none">
+          Total Price: <span id="total-price">₹0</span>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Founder / About Section -->
+  <section id="founder" class="max-w-5xl mx-auto px-4 py-20" data-aos="fade-up" data-aos-delay="500">
+    <div class="flex flex-col md:flex-row gap-10 items-center mb-10">
+      <div class="flex-shrink-0 text-center">
+        <img
+          src="195314221_4086125051425545_2293931291941725734_n.jpg"
+          alt="Aravind Paraniraja, Founder of Aegan"
+          class="founder-img"
+          loading="lazy"
+        />
+        <span class="text-purple-300 font-semibold text-lg block mt-2">Aravind Paraniraja</span>
+        <a href="https://aravind1089.github.io/aravind-portfolio/" target="_blank" rel="noopener" class="know-more-link mt-4 inline-block" aria-label="Know more about the founder">Know More &rarr;</a>
+      </div>
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-purple-300">👨‍💼 About the Founder</h2>
+        <p class="text-lg text-gray-200 mb-6">
+          I was born into a humble middle-class family where dreams often took a back seat to responsibilities. But from the very beginning, I knew I was meant to build something—not just for myself, but for others like me who dared to dream beyond their circumstances.
+        </p>
+        <blockquote class="story-quote">
+          At just 8 years old, I started working at a platform-side idly shop, not because I had to, but because I wanted to ease the weight my parents carried. Among hot plates and morning rush, I learned my first business lesson: <span class="highlight">never say no to a customer</span>.
+        </blockquote>
+        <p>
+          That fire to learn and serve stayed with me.<br />
+          <span class="text-purple-300 font-semibold">As a teen</span>, I earned a Hardware & Networking certification, repairing PCs, installing OSes, and guiding classmates on what configuration suited their needs—all while pursuing my BCA (Bachelor of Computer Applications). I didn’t wait for opportunity—<span class="highlight">I created it</span>.
+        </p>
+        <p>
+          By the time I started my MCA, I was running a small video editing business from home, using Movie Maker to craft college ads and symposium highlights. I didn’t know it then, but the seeds of <span class="highlight">Aegan</span> had already been planted.
+        </p>
+        <p>
+          After graduation, my career shifted into high gear—diving deep into data platforms, mastering MS Access, VBA, SQL, and Power BI. I’ve spent over
+          <span class="highlight">12 years in the tech field</span>, automating 250+ reports, managing 12+ contracts, and even saving 4.5 full-time equivalents (FTEs) through zero-touch BI automation.
+        </p>
+        <p>
+          And just when things were at their peak, life hit pause—a seizure forced me into heavy medication.<br />
+          But <span class="highlight">I refused to give up</span>.
+        </p>
+        <blockquote class="story-quote">
+          Out of that challenge came clarity and purpose. I built <span class="highlight">Aegan Analytics & Studio</span>, named after my son—a blend of everything I’ve learned: the empathy from serving idlies, the logic from coding, and the creativity from editing videos.
+        </blockquote>
+        <p>
+          Today, <span class="highlight">Aegan isn’t just a business</span>. It’s a story. A mission. A movement.<br />
+          We transform raw data into insight and videos into emotion.
+        </p>
+        <p>
+          If you’re a brand looking for a voice, a business craving clarity, or a student ready to learn—<span class="highlight">Aegan is here for you</span>.
+        </p>
+        <div class="mt-10">
+          <a href="#analytics" class="btn-purple text-lg shadow-lg hover:scale-105 transition inline-block"
+            >Explore Aegan Services</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials & FAQ -->
+  <section
+    id="testimonials-faq"
+    class="bg-[#1c1b29] py-16 px-6"
+    data-aos="fade-up"
+    data-aos-delay="600"
+  >
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
+      <!-- Testimonials -->
+      <div>
+        <h2 class="section-title mb-8 text-center md:text-left">Client Testimonials</h2>
+        <div class="space-y-8 max-w-lg mx-auto md:mx-0">
+          <blockquote tabindex="0">
+            "Aegan transformed our analytics reporting. Their dashboards are insightful and easy to use."
+            <footer class="mt-2 font-semibold text-purple-300">- N. Kumar, CEO</footer>
+          </blockquote>
+          <blockquote tabindex="0">
+            "The video promos created by Aegan Video Studio boosted our engagement significantly."
+            <footer class="mt-2 font-semibold text-purple-300">- R. Priya, Marketing Head</footer>
+          </blockquote>
+          <blockquote tabindex="0">
+            "Their Power BI training sessions were practical and immediately applicable."
+            <footer class="mt-2 font-semibold text-purple-300">- S. Rajan, Data Analyst</footer>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div>
+        <h2 class="section-title mb-8 text-center md:text-left">Frequently Asked Questions</h2>
+        <div class="space-y-6 max-w-lg mx-auto md:mx-0">
+          <details class="rounded-lg border border-purple-600 bg-[#2a2647]" tabindex="0">
+            <summary class="p-4 text-lg select-none">What is included in the Power BI Analytics service?</summary>
+            <p class="p-4 border-t border-purple-400 text-gray-300">
+              We provide custom dashboard design, data modeling, and automation tailored to your business needs.
+            </p>
+          </details>
+          <details class="rounded-lg border border-purple-600 bg-[#2a2647]" tabindex="0">
+            <summary class="p-4 text-lg select-none">Do you offer video editing for social media reels?</summary>
+            <p class="p-4 border-t border-purple-400 text-gray-300">
+              Yes, we specialize in creating engaging reels, promos, and edits optimized for social platforms.
+            </p>
+          </details>
+          <details class="rounded-lg border border-purple-600 bg-[#2a2647]" tabindex="0">
+            <summary class="p-4 text-lg select-none">How do the training workshops work?</summary>
+            <p class="p-4 border-t border-purple-400 text-gray-300">
+              Our workshops are interactive, remote or onsite, focused on practical Power BI skills and automation techniques.
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section id="contact" class="max-w-4xl mx-auto px-6 py-16" data-aos="fade-up" data-aos-delay="700">
+    <h2 class="section-title mb-8 text-center">Contact Us</h2>
+    <form
+      action="https://formsubmit.co/aegananalytics@gmail.com"
+      method="POST"
+      class="space-y-8 max-w-xl mx-auto"
+      target="_blank"
+      novalidate
+      aria-label="Contact form"
+    >
+      <input type="hidden" name="_captcha" value="false" />
+      <label class="block">
+        <span class="text-gray-300 font-semibold mb-2 block">Name</span>
+        <input
+          name="name"
+          type="text"
+          required
+          class="w-full rounded-md bg-[#2a2647] border border-purple-600 px-4 py-3 text-white placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          placeholder="Your Name"
+          autocomplete="name"
+        />
+      </label>
+      <label class="block">
+        <span class="text-gray-300 font-semibold mb-2 block">Email</span>
+        <input
+          name="email"
+          type="email"
+          required
+          class="w-full rounded-md bg-[#2a2647] border border-purple-600 px-4 py-3 text-white placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          placeholder="you@example.com"
+          autocomplete="email"
+        />
+      </label>
+      <label class="block">
+        <span class="text-gray-300 font-semibold mb-2 block">Message</span>
+        <textarea
+          name="message"
+          rows="5"
+          required
+          class="w-full rounded-md bg-[#2a2647] border border-purple-600 px-4 py-3 text-white placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          placeholder="Write your message here"
+        ></textarea>
+      </label>
+      <button type="submit" class="btn-purple w-full text-lg shadow-lg hover:shadow-xl transition">
+        Send Message
+      </button>
+    </form>
+  </section>
+
+  <!-- Chatbot Button -->
+  <button
+    id="chatbot-toggle"
+    aria-label="Open Chatbot"
+    class="fixed bottom-24 right-6 z-50 bg-gradient-to-tr from-purple-600 to-purple-400 text-white p-4 rounded-full shadow-lg hover:shadow-2xl transition"
+  >
+    💬
+  </button>
+
+  <!-- Chatbot Widget -->
+  <div
+    id="chatbot-container"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="chatbot-header"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    <div id="chatbot-header" class="flex items-center justify-between">
+      <span id="chatbot-header" class="text-lg select-none">Aegan Chatbot</span>
+      <button id="chatbot-close" aria-label="Close Chatbot">&times;</button>
+    </div>
+    <div id="chatbot-messages" tabindex="0" class="focus:outline-none" aria-live="polite" aria-atomic="false"></div>
+    <form id="chatbot-form" aria-label="Chatbot input" class="flex items-center gap-2 p-3 border-t border-purple-600">
+      <input type="text" id="chatbot-input" aria-label="Type your message" autocomplete="off" required placeholder="Ask me anything..." />
+      <button type="submit" id="chatbot-send" aria-label="Send message">Send</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer
+    class="bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900 text-center text-purple-300 py-8 mt-14 select-none"
+  >
+    &copy; 2025 Aegan Analytics & Video Studio &nbsp;|&nbsp;
+    <a href="mailto:aegananalytics@gmail.com" class="underline hover:text-purple-400">Contact Us</a>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 900,
+      once: true,
+    });
+
+    // Carousel logic
+    (function () {
+      const slide = document.getElementById('carousel-slide');
+      const totalSlides = slide.children.length;
+      const nextBtn = document.getElementById('next-btn');
+      const prevBtn = document.getElementById('prev-btn');
+      let current = 0;
+
+      function updateCarousel() {
+        slide.style.transform = `translateX(-${current * 100}%)`;
+        for (let i = 0; i < totalSlides; i++) {
+          slide.children[i].setAttribute('tabindex', i === current ? '0' : '-1');
+        }
+      }
+
+      nextBtn.addEventListener('click', () => {
+        current = (current + 1) % totalSlides;
+        updateCarousel();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        current = (current - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+      });
+
+      setInterval(() => {
+        current = (current + 1) % totalSlides;
+        updateCarousel();
+      }, 8000);
+
+      updateCarousel();
+    })();
+
+    // Pricing calculator logic
+    document.getElementById('pricing-form').addEventListener('change', function () {
+      const checkboxes = this.querySelectorAll('input[type="checkbox"]');
+      let total = 0;
+      checkboxes.forEach((cb) => {
+        if (cb.checked) total += Number(cb.dataset.cost);
+      });
+
+      const totalPriceElem = document.getElementById('total-price');
+      let currentValue = +totalPriceElem.textContent.replace(/[^\d]/g, '') || 0;
+      let step = (total - currentValue) / 10;
+      let i = 0;
+      const interval = setInterval(() => {
+        currentValue += step;
+        i++;
+        if (i >= 10) {
+          clearInterval(interval);
+          totalPriceElem.textContent = `₹${total.toLocaleString()}`;
+        } else {
+          totalPriceElem.textContent = `₹${Math.round(currentValue).toLocaleString()}`;
+        }
+      }, 40);
+    });
+
+    // Chatbot widget logic (mock)
+    (function () {
+      const chatbotToggle = document.getElementById('chatbot-toggle');
+      const chatbotContainer = document.getElementById('chatbot-container');
+      const chatbotClose = document.getElementById('chatbot-close');
+      const chatbotMessages = document.getElementById('chatbot-messages');
+      const chatbotForm = document.getElementById('chatbot-form');
+      const chatbotInput = document.getElementById('chatbot-input');
+
+      function appendMessage(sender, text) {
+        const msgDiv = document.createElement('div');
+        msgDiv.classList.add(
+          sender === 'user' ? 'chatbot-message-user' : 'chatbot-message-bot'
+        );
+        msgDiv.textContent = text;
+        chatbotMessages.appendChild(msgDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      chatbotToggle.addEventListener('click', () => {
+        chatbotContainer.style.display = 'flex';
+        chatbotInput.focus();
+      });
+
+      chatbotClose.addEventListener('click', () => {
+        chatbotContainer.style.display = 'none';
+        chatbotToggle.focus();
+      });
+
+      chatbotForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userMsg = chatbotInput.value.trim();
+        if (!userMsg) return;
+        appendMessage('user', userMsg);
+        chatbotInput.value = '';
+        appendMessage('bot', 'Thinking...');
+
+        setTimeout(() => {
+          chatbotMessages.lastChild.textContent =
+            "Thanks for your question! We'll get back to you shortly.";
+          chatbotInput.focus();
+        }, 1600);
+      });
+    })();
+  </script>
+</body>
+</html>
