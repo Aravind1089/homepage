@@ -551,43 +551,53 @@
   </section>
 
   <!-- Pricing Calculator -->
-  <section id="pricing" class="bg-[#1c1b29] py-14 px-6" data-aos="fade-up" data-aos-delay="400">
-    <div class="max-w-4xl mx-auto rounded-xl border border-purple-600 p-8 shadow-2xl">
-      <h2 class="section-title mb-8 text-center">Pricing Calculator</h2>
-      <form id="pricing-form" class="space-y-6" aria-label="Pricing calculator form">
-        <fieldset class="border border-purple-600 rounded-xl p-6">
-          <legend class="font-semibold mb-4 text-purple-300">Select Services</legend>
-          <label class="flex items-center gap-3 text-gray-300 cursor-pointer hover:text-purple-400 transition-colors">
-            <input type="checkbox" name="service" value="Power BI Analytics" data-cost="5000" />
-            Power BI Analytics - ₹5,000
-          </label>
-          <label class="flex items-center gap-3 text-gray-300 cursor-pointer hover:text-purple-400 transition-colors">
-            <input type="checkbox" name="service" value="Automation Solutions" data-cost="3500" />
-            Automation Solutions - ₹3,500
-          </label>
-          <label class="flex items-center gap-3 text-gray-300 cursor-pointer hover:text-purple-400 transition-colors">
-            <input type="checkbox" name="service" value="Video Editing" data-cost="4000" />
-            Video Editing (Reels, Promos) - ₹4,000
-          </label>
-          <label class="flex items-center gap-3 text-gray-300 cursor-pointer hover:text-purple-400 transition-colors">
-            <input type="checkbox" name="service" value="Training & Workshops" data-cost="2500" />
-            Training & Workshops - ₹2,500
-          </label>
-        </fieldset>
+  <section id="pricing" class="bg-[#1c1b29] py-14 px-6">
+  <div class="max-w-4xl mx-auto rounded-xl border border-purple-600 p-8 shadow-2xl">
+    <h2 class="section-title mb-8 text-center">Pricing Calculator</h2>
+    <form id="pricing-form" class="space-y-6" aria-label="Pricing calculator form">
+      
+      <!-- Power BI Dashboard -->
+      <fieldset class="border border-purple-600 rounded-xl p-6">
+        <legend class="font-semibold mb-4 text-purple-300">Select Services</legend>
+        
+        <label class="block text-gray-300 mb-4">
+          <input type="checkbox" name="service" value="Power BI Dashboard" data-rate="1000" data-unit="hour" class="mr-2" />
+          Power BI Dashboard – ₹1000 / hour
+          <input type="number" min="1" value="1" class="ml-3 w-20 p-1 rounded bg-gray-800 text-white border border-gray-600 service-qty" data-for="Power BI Dashboard" disabled />
+          <span class="text-sm text-gray-400">(hours)</span>
+        </label>
+        
+        <!-- Video Editing -->
+        <label class="block text-gray-300 mb-4">
+          <input type="checkbox" name="service" value="Video Editing" data-rate="500" data-unit="minute" class="mr-2" />
+          Video Editing – ₹500 / minute (raw data in 3 clips)
+          <input type="number" min="1" value="1" class="ml-3 w-20 p-1 rounded bg-gray-800 text-white border border-gray-600 service-qty" data-for="Video Editing" disabled />
+          <span class="text-sm text-gray-400">(minutes)</span>
+        </label>
+        
+        <!-- Training -->
+        <label class="block text-gray-300">
+          <input type="checkbox" name="service" value="Training" data-rate="1500" data-unit="hour" class="mr-2" />
+          Training Session – ₹1500 / hour
+          <input type="number" min="1" value="1" class="ml-3 w-20 p-1 rounded bg-gray-800 text-white border border-gray-600 service-qty" data-for="Training" disabled />
+          <span class="text-sm text-gray-400">(hours)</span>
+        </label>
+      </fieldset>
 
-        <p class="text-center text-purple-300 text-2xl font-extrabold select-none">
-          Total Price: <span id="total-price">₹0</span>
-        </p>
-      </form>
-    </div>
-  </section>
+      <p class="text-center text-purple-300 text-2xl font-extrabold select-none">
+        Total Price: <span id="total-price">₹0</span>
+      </p>
+    </form>
+  </div>
+</section>
+
 
   <!-- Founder / About Section -->
   <section id="founder" class="max-w-5xl mx-auto px-4 py-20" data-aos="fade-up" data-aos-delay="500">
     <div class="flex flex-col md:flex-row gap-10 items-center mb-10">
       <div class="flex-shrink-0 text-center">
         <img
-          src="195314221_4086125051425545_2293931291941725734_n.jpg"
+          src="ceo.jpg"
           alt="Aravind Paraniraja, Founder of Aegan"
           class="founder-img"
           loading="lazy"
@@ -651,15 +661,15 @@
         <div class="space-y-8 max-w-lg mx-auto md:mx-0">
           <blockquote tabindex="0">
             "Aegan transformed our analytics reporting. Their dashboards are insightful and easy to use."
-            <footer class="mt-2 font-semibold text-purple-300">- N. Kumar, CEO</footer>
+            <footer class="mt-2 font-semibold text-purple-300">- Sounder, Product Manager</footer>
           </blockquote>
           <blockquote tabindex="0">
             "The video promos created by Aegan Video Studio boosted our engagement significantly."
-            <footer class="mt-2 font-semibold text-purple-300">- R. Priya, Marketing Head</footer>
+            <footer class="mt-2 font-semibold text-purple-300">- Muthu, Marketing Head</footer>
           </blockquote>
           <blockquote tabindex="0">
             "Their Power BI training sessions were practical and immediately applicable."
-            <footer class="mt-2 font-semibold text-purple-300">- S. Rajan, Data Analyst</footer>
+            <footer class="mt-2 font-semibold text-purple-300">- Karthick, Data Analyst</footer>
           </blockquote>
         </div>
       </div>
@@ -820,28 +830,46 @@
     })();
 
     // Pricing calculator logic
-    document.getElementById('pricing-form').addEventListener('change', function () {
-      const checkboxes = this.querySelectorAll('input[type="checkbox"]');
-      let total = 0;
-      checkboxes.forEach((cb) => {
-        if (cb.checked) total += Number(cb.dataset.cost);
-      });
+   document.getElementById('pricing-form').addEventListener('change', function (e) {
+  const checkboxes = this.querySelectorAll('input[type="checkbox"]');
+  let total = 0;
 
-      const totalPriceElem = document.getElementById('total-price');
-      let currentValue = +totalPriceElem.textContent.replace(/[^\d]/g, '') || 0;
-      let step = (total - currentValue) / 10;
-      let i = 0;
-      const interval = setInterval(() => {
-        currentValue += step;
-        i++;
-        if (i >= 10) {
-          clearInterval(interval);
-          totalPriceElem.textContent = `₹${total.toLocaleString()}`;
-        } else {
-          totalPriceElem.textContent = `₹${Math.round(currentValue).toLocaleString()}`;
-        }
-      }, 40);
-    });
+  checkboxes.forEach((cb) => {
+    const qtyInput = this.querySelector(`input.service-qty[data-for="${cb.value}"]`);
+    
+    if (cb.checked) {
+      qtyInput.disabled = false; // enable input when checked
+      let qty = Number(qtyInput.value) || 1;
+      total += qty * Number(cb.dataset.rate);
+    } else {
+      qtyInput.disabled = true; // disable if not selected
+    }
+  });
+
+  // Animate total like before
+  const totalPriceElem = document.getElementById('total-price');
+  let currentValue = +totalPriceElem.textContent.replace(/[^\d]/g, '') || 0;
+  let step = (total - currentValue) / 10;
+  let i = 0;
+  const interval = setInterval(() => {
+    currentValue += step;
+    i++;
+    if (i >= 10) {
+      clearInterval(interval);
+      totalPriceElem.textContent = `₹${total.toLocaleString()}`;
+    } else {
+      totalPriceElem.textContent = `₹${Math.round(currentValue).toLocaleString()}`;
+    }
+  }, 40);
+});
+
+// Also recalc when quantity inputs are changed
+document.querySelectorAll('.service-qty').forEach((input) => {
+  input.addEventListener('input', () => {
+    document.getElementById('pricing-form').dispatchEvent(new Event('change'));
+  });
+});
+
 
     // Chatbot widget logic (mock)
     (function () {
